@@ -11,7 +11,8 @@
 		"anlutro/curl": "0.6.*",
 		"mjaschen/phpgeo": "0.2.*",
 		"barryvdh/laravel-cors": "0.2.x",
-		"mitch/hashids": "1.x"
+		"mitch/hashids": "1.x",
+		"liebig/cron": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "~2.0"
