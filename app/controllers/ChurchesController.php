@@ -1,6 +1,6 @@
 <?php
 
-class ChurchController extends \BaseController {
+class ChurchesController extends \BaseController {
 
   public function __construct()
   {
@@ -14,7 +14,7 @@ class ChurchController extends \BaseController {
    */
   public function index()
   {
-    return 'user';
+    return 'churches';
   }
 
   /**
@@ -29,7 +29,7 @@ class ChurchController extends \BaseController {
     $in = Input::only('name', 'lat', 'lng', 'cid');
 
     $rules = array(
-      'name' => 'required | alpha_dash | unique:church',
+      'name' => 'required | alpha_dash | unique:churches',
       'lat'  => 'required | numeric',
       'lng'  => 'required | numeric',
       'cid'  => 'integer'

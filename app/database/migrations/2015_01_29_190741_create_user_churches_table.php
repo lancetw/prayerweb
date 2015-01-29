@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateUserChurchTable extends Migration {
+class CreateUserChurchesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateUserChurchTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_church', function(Blueprint $table)
+		Schema::create('user_churches', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
 
@@ -32,7 +32,7 @@ class CreateUserChurchTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_church');
+		Schema::drop('user_churches');
 	}
 
 }

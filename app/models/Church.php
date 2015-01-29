@@ -12,7 +12,7 @@ class Church extends \Eloquent {
    *
    * @var string
    */
-  protected $table = 'church';
+  protected $table = 'churches';
 
   protected $fillable = ['name', 'lat', 'lng', 'qlink', 'cid'];
 

@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class UserChurch extends \Eloquent {
-
+class Busted extends \Eloquent {
   use SoftDeletingTrait;
 
   protected $dates = ['deleted_at'];
@@ -12,16 +11,14 @@ class UserChurch extends \Eloquent {
    *
    * @var string
    */
-  protected $table = 'user_churches';
+  protected $table = 'busteds';
 
-  protected $fillable = ['uid', 'cid'];
+  protected $fillable = ['uid', 'busted_at', 'name', 'mask', 'freq', 'sinner', 'baptized', 'meeter', 'email', 'nick', 'church'];
 
   /**
    * The attributes excluded from the model's JSON form.
    *
    * @var array
    */
-  protected $hidden = array('uid', 'cid', 'deleted_at', 'created_at', 'updated_at', 'id');
-
+  protected $hidden = array('uid', 'name', 'deleted_at', 'created_at', 'updated_at', 'id');
 }
-

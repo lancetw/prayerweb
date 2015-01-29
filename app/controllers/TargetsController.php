@@ -54,10 +54,10 @@ class TargetsController extends \BaseController {
       $response = $errs->all();
     } else {
       // 先檢查有沒有登記過再新增
-      $auth_id = Auth::user()->id;
+      $authId = Auth::user()->id;
       $uid = Target::where(
         array(
-          'uid' => $auth_id ,
+          'uid' => $authId,
           'name' => $in['name']
         )
       )->pluck('uid');
@@ -94,7 +94,40 @@ class TargetsController extends \BaseController {
    */
   public function update($id)
   {
-    //
+    $response = [];
+    $statusCode = 200;
+
+    $in = Input::only('name', 'mask', 'freq', 'sinner', 'baptized', 'meeter', 'email', 'nick', 'church');
+
+    $rules = array(
+      'name' => 'required',
+      'mask' => 'required',
+      'freq' => 'required | integer',
+      'sinner' => 'required | boolean',
+      'baptized' => 'required | boolean',
+      'meeter' => 'required | boolean',
+      'email' => 'email'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) {
+      $errs = $vd->messages();
+      $statusCode = 401;
+      $response = $errs->all();
+    } else {
+      $authId = Auth::user()->id;
+      $target = Target::find($id);
+
+      if ($target && $target->uid == $authId) {
+        if (!$target->update($in)) {
+          $statusCode = 304;
+        }
+      } else {
+        $statusCode = 401;
+      }
+    }
+
+    return Response::json($response, $statusCode);
   }
 
   /**
@@ -106,7 +139,22 @@ class TargetsController extends \BaseController {
    */
   public function destroy($id)
   {
-    //
+    $response = [];
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+    $target = Target::find($id);
+
+    if ($target && $target->uid == $authId) {
+      // 紀錄在 busted
+      Busted::create($target->toArray());
+      $target->forceDelete();
+
+    } else {
+      $statusCode = 401;
+    }
+
+    return Response::json($response, $statusCode);
   }
 
 }

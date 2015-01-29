@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends \BaseController {
+class UsersController extends \BaseController {
 
   public function __construct()
   {
@@ -14,7 +14,7 @@ class UserController extends \BaseController {
    */
   public function index()
   {
-    return 'user';
+    return 'users';
   }
 
   /**

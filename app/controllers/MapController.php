@@ -101,7 +101,7 @@ class MapController extends \BaseController {
       $dist1 = $this->dist_($lat, $lng, $a->lat, $a->lng);
       $dist2 = $this->dist_($lat, $lng, $b->lat, $b->lng);
 
-      if ($dist1 === $dist2) return 0;
+      if ($dist1 == $dist2) return 0;
       return $dist1 > $dist2 ? 1 : -1;
 
     });

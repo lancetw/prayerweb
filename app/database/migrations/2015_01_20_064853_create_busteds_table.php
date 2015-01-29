@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatchedTable extends Migration {
+class CreateBustedsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,12 @@ class CreateCatchedTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('catched', function(Blueprint $table)
+		Schema::create('busteds', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
 
 			$table->increments('id');
 			$table->timestamps();
-			$table->dateTime('catched_at');
 			$table->integer('uid')->unsigned()->index();
 			$table->string('name');
 			$table->string('mask');
@@ -40,7 +39,7 @@ class CreateCatchedTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('catched');
+		Schema::drop('busteds');
 	}
 
 }

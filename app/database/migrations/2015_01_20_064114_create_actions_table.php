@@ -18,7 +18,7 @@ class CreateActionsTable extends Migration {
 
 			$table->bigIncrements('id');
 			$table->timestamps();
-			$table->string('uuidx')->unique();
+			$table->integer('uid')->unsigned()->index();
 			$table->integer('tid')->unsigned()->index();
 			$table->softDeletes();
 		});
