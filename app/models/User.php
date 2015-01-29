@@ -26,6 +26,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    *
    * @var array
    */
-  protected $hidden = array('password', 'remember_token');
+  protected $hidden = array('uuidx', 'password', 'remember_token', 'deleted_at', 'seed', 'created_at', 'updated_at', 'id');
+
+  /**
+   * Override UserTrait#getAuthPassword
+   *
+   */
+  public function getAuthPassword() {
+    return $this->uuidx;
+  }
 
 }

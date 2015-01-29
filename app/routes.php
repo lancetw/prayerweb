@@ -16,5 +16,13 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::controller('map', 'MapController');
-Route::resource('user', 'UserController');
+
+Route::post('api/v1/user', 'UserController@store');
+
+Route::group(array('prefix' => 'api/v1'), function()
+{
+  Route::resource('user', 'UserController');
+  Route::controller('map', 'MapController');
+});
+
+

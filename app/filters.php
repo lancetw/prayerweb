@@ -85,3 +85,17 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+|--------------------------------------------------------------------------
+| API Filter
+|--------------------------------------------------------------------------
+|
+| For RESTful API
+|
+*/
+
+Route::filter('auth.api', function()
+{
+	return Auth::onceBasic('email');
+});

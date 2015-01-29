@@ -4,7 +4,7 @@ class UserController extends \BaseController {
 
   public function __construct()
   {
-    $this->beforeFilter('auth.basic', array('except' => array('index', 'show', 'store')));
+    $this->beforeFilter('auth.api', array('except' => array('index', 'show', 'store')));
   }
 
   /**
@@ -24,30 +24,51 @@ class UserController extends \BaseController {
    */
   public function store()
   {
-    $statusCode = 200;
+    $response = [];
+    $statusCode = 201;
     $in = Input::only('uuidx', 'email');
 
     $rules = array(
-        'uuidx' => 'required | unique:users',
-        'email' => 'required | unique:users'
+      'uuidx' => 'required | alpha_dash | unique:users',
+      'email' => 'required | email | unique:users'
     );
 
     $vd = Validator::make($in, $rules);
     if($vd->fails()) {
-      $statusCode = 400;
-      $response = [];
+      $errs = $vd->messages();
+
+      if ($errs->has('uuidx') || $errs->has('email')) {
+
+        if ($errs->has('email')) {
+
+          $credentials['email'] = $in['email'];
+          $credentials['password'] = $in['uuidx'];
+
+          if (Auth::attempt($credentials, false)) {
+            $statusCode = 200;
+            $response = Auth::user();
+          } else {
+            $statusCode = 401;
+            $response = $errs->all();
+          }
+        } else {
+          $statusCode = 401;
+          $response = $errs->all();
+        }
+      }
+
       return Response::json($response, $statusCode);
     }
 
     mt_srand(crc32(microtime()));
 
     $data = array(
-      'uuidx' => $in['uuidx'],
+      'uuidx' => Hash::make($in['uuidx']),
       'email' => $in['email'],
       'seed' => mt_rand()
     );
 
-    $response = User::firstOrCreate($data);
+    $response = User::create($data);
 
     return Response::json($response, $statusCode);
   }

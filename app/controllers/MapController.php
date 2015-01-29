@@ -8,7 +8,7 @@ class MapController extends \BaseController {
 
   public function __construct()
   {
-
+    $this->beforeFilter('auth.api');
   }
 
   public function getIndex()
