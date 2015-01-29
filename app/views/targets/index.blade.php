@@ -1,0 +1,1 @@
+/Users/lancetw/Documents/webdev/prayerweb/app/views/targets/index.blade.php

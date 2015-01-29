@@ -6,10 +6,15 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
+		"caouecs/laravel4-lang": "0.12.*",
 		"toin0u/geocoder-laravel": "@stable",
 		"anlutro/curl": "0.6.*",
 		"mjaschen/phpgeo": "0.2.*",
-		"barryvdh/laravel-cors": "0.2.x"
+		"barryvdh/laravel-cors": "0.2.x",
+		"mitch/hashids": "1.x"
+	},
+	"require-dev": {
+		"way/generators": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

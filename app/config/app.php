@@ -124,6 +124,8 @@ return array(
 		'Toin0u\Geocoder\GeocoderServiceProvider',
 		'anlutro\cURL\Laravel\cURLServiceProvider',
 		'Barryvdh\Cors\CorsServiceProvider',
+		'Mitch\Hashids\HashidsServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
 
 	),
 
@@ -193,6 +195,7 @@ return array(
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Geocoder'          => 'Toin0u\Geocoder\GeocoderFacade',
 		'cURL'              => 'anlutro\cURL\Laravel\cURL',
+		'Hashids'           => 'Mitch\Hashids\Hashids',
 
 	),
 

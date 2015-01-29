@@ -19,7 +19,7 @@ class CreateCatchedTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->dateTime('catched_at');
-			$table->string('uuidx')->unique();
+			$table->integer('uid')->unsigned()->index();
 			$table->string('name');
 			$table->string('mask');
 			$table->integer('freq');

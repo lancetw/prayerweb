@@ -1,0 +1,112 @@
+<?php
+
+class TargetsController extends \BaseController {
+
+  public function __construct()
+  {
+    $this->beforeFilter('auth.api', array('except' => array('index', 'show')));
+  }
+
+  /**
+   * Display a listing of the resource.
+   * GET /targets
+   *
+   * @return Response
+   */
+  public function index()
+  {
+    return 'target';
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   * GET /targets/create
+   *
+   * @return Response
+   */
+  public function create()
+  {
+    //
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   * POST /targets
+   *
+   * @return Response
+   */
+  public function store()
+  {
+    $response = [];
+    $statusCode = 201;
+    $in = Input::only('name', 'mask', 'freq');
+
+    $rules = array(
+      'name'  => 'required',
+      'mask'  => 'required',
+      'freq'  => 'required | integer',
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) {
+      $errs = $vd->messages();
+      $statusCode = 400;
+      $response = $errs->all();
+    } else {
+      // 先檢查有沒有登記過再新增
+      $auth_id = Auth::user()->id;
+      $uid = Target::where(
+        array(
+          'uid' => $auth_id ,
+          'name' => $in['name']
+        )
+      )->pluck('uid');
+
+      if (!$uid) {
+        $in['uid'] = Auth::user()->id;
+        $response = Target::firstOrCreate($in);
+      } else {
+        $statusCode = 302;
+      }
+    }
+
+    return Response::json($response, $statusCode);
+  }
+
+  /**
+   * Display the specified resource.
+   * GET /targets/{id}
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show($id)
+  {
+    //
+  }
+
+  /**
+   * Update the specified resource in storage.
+   * PUT /targets/{id}
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function update($id)
+  {
+    //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   * DELETE /targets/{id}
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function destroy($id)
+  {
+    //
+  }
+
+}

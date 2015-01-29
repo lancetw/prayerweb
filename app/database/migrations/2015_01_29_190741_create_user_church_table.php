@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateUsersTable extends Migration {
+class CreateUserChurchTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,19 +12,18 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function(Blueprint $table)
+		Schema::create('user_church', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
 
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('uuidx')->unique();
-			$table->string('email');
-			$table->integer('seed')->unsigned();
-			$table->boolean('status')->default(false);
+			$table->integer('uid')->unsigned()->index();
+			$table->integer('cid')->unsigned()->index();
 			$table->softDeletes();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -33,7 +32,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('user_church');
 	}
 
 }

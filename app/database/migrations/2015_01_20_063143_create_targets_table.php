@@ -18,7 +18,7 @@ class CreateTargetsTable extends Migration {
 
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('uuidx')->unique();
+			$table->integer('uid')->unsigned()->index();
 			$table->string('name');
 			$table->string('mask');
 			$table->integer('freq');

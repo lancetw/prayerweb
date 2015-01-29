@@ -57,18 +57,14 @@ class UserController extends \BaseController {
         }
       }
 
-      return Response::json($response, $statusCode);
+    } else {
+      mt_srand(crc32(microtime()));
+
+      $in['uuidx'] = Hash::make($in['uuidx']);
+      $in['seed'] = mt_rand();
+
+      $response = User::create($in);
     }
-
-    mt_srand(crc32(microtime()));
-
-    $data = array(
-      'uuidx' => Hash::make($in['uuidx']),
-      'email' => $in['email'],
-      'seed' => mt_rand()
-    );
-
-    $response = User::create($data);
 
     return Response::json($response, $statusCode);
   }
@@ -82,7 +78,7 @@ class UserController extends \BaseController {
    */
   public function show($id)
   {
-    //
+    return 'user';
   }
 
 
@@ -94,7 +90,39 @@ class UserController extends \BaseController {
    */
   public function update($id)
   {
-    //
+    $response = [];
+    $statusCode = 200;
+
+    $in = Input::only('uuidx', 'email');
+
+    $rules = array(
+      'uuidx' => 'required | alpha_dash | unique:users',
+      'email' => 'required | email'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) {
+      $errs = $vd->messages();
+
+      if ($errs->has('uuidx') || $errs->has('email')) {
+        $statusCode = 401;
+        $response = $errs->all();
+      }
+    } else {
+      $authId = Auth::user()->id;
+
+      if ($id === $authId) {
+        $user = User::find($id);
+        $user->uuidx = Hash::make($in['uuidx']);
+        $user->save();
+
+        $response = $user;
+      } else {
+        $statusCode = 401;
+      }
+    }
+
+    return Response::json($response, $statusCode);
   }
 
 
@@ -106,8 +134,19 @@ class UserController extends \BaseController {
    */
   public function destroy($id)
   {
-    $user = User::find($id);
-    $user->delete();
+    $response = [];
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+
+    if ($id === $authId) {
+      $user = User::find($id);
+      $user->delete();
+    } else {
+      $statusCode = 401;
+    }
+
+    return Response::json($response, $statusCode);
   }
 
 

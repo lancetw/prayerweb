@@ -94,7 +94,8 @@ class MapController extends \BaseController {
   }
 
 
-  function getSort_(&$rdata, $lat, $lng) {
+  function getSort_(&$rdata, $lat, $lng)
+  {
     usort($rdata, function ($a, $b) use ($lat, $lng) {
 
       $dist1 = $this->dist_($lat, $lng, $a->lat, $a->lng);
@@ -107,17 +108,20 @@ class MapController extends \BaseController {
   }
 
 
-  function is_lat($lat) {
+  function is_lat($lat)
+  {
     return $this->is_coordinate($lat, 90, -90);
   }
 
 
-  function is_lng($lng) {
+  function is_lng($lng)
+  {
     return $this->is_coordinate($lng, 180, -180);
   }
 
 
-  function is_coordinate($c, $limit_positive, $limit_negative) {
+  function is_coordinate($c, $limit_positive, $limit_negative)
+  {
     if (isset($c) &&
         !empty($c) &&
         $c > 0 &&
@@ -130,7 +134,8 @@ class MapController extends \BaseController {
   }
 
 
-  function dist_($lat1, $lng1, $lat2, $lng2) {
+  function dist_($lat1, $lng1, $lat2, $lng2)
+  {
     if ($this->is_lat($lat1) &&
         $this->is_lng($lng1) &&
         $this->is_lat($lat2) &&
@@ -145,7 +150,8 @@ class MapController extends \BaseController {
   }
 
 
-  function mapInfo_($in) {
+  function mapInfo_($in)
+  {
     $mapOptions = array(
       'mode' => !empty($in['town']) ? 'phone' : 'pad',
       'code' => $in['code'],

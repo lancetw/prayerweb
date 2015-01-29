@@ -22,6 +22,9 @@ Route::post('api/v1/user', 'UserController@store');
 Route::group(array('prefix' => 'api/v1'), function()
 {
   Route::resource('user', 'UserController');
+  Route::resource('church', 'ChurchController');
+  Route::resource('user_church', 'UserChurchController');
+  Route::resource('target', 'TargetsController');
   Route::controller('map', 'MapController');
 });
 

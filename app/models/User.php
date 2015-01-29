@@ -6,7 +6,7 @@ use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends \Eloquent implements UserInterface, RemindableInterface {
 
   use UserTrait, RemindableTrait;
   use SoftDeletingTrait;
@@ -32,8 +32,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
    * Override UserTrait#getAuthPassword
    *
    */
-  public function getAuthPassword() {
+  public function getAuthPassword()
+  {
     return $this->uuidx;
+  }
+
+  public function churchs()
+  {
+    return $this->hasMany('UserChurch');
+  }
+
+  public function targets()
+  {
+    return $this->hasMany('targets');
   }
 
 }

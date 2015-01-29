@@ -97,5 +97,14 @@ Route::filter('csrf', function()
 
 Route::filter('auth.api', function()
 {
-	return Auth::onceBasic('email');
+  $message = '無效的憑證。';
+
+  $headers = ['WWW-Authenticate' => 'Basic'];
+
+  $response = Auth::onceBasic('email');
+
+  if (!is_null($response)) {
+  	return Response::json($message, 401, $headers);
+  }
+
 });

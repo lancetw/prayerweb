@@ -23,6 +23,7 @@ class CreateChurchTable extends Migration {
 			$table->double('lat');
 			$table->double('lng');
 			$table->integer('cid')->unsigned()->nullable();
+			$table->boolean('status')->default(false);
 			$table->softDeletes();
 		});
 	}
