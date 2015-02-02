@@ -28,12 +28,13 @@ class TargetsController extends \BaseController {
   {
     $response = [];
     $statusCode = 201;
-    $in = Input::only('name', 'mask', 'freq');
+    $in = Input::only('name', 'mask', 'freq', 'sinner');
 
     $rules = array(
-      'name'  => 'required',
-      'mask'  => 'required',
-      'freq'  => 'required | integer',
+      'name'   => 'required',
+      'mask'   => 'required',
+      'freq'   => 'required | integer',
+      'sinner' => 'required | boolean'
     );
 
     $vd = Validator::make($in, $rules);
