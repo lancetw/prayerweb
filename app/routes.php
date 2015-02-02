@@ -25,6 +25,7 @@ Route::group(array('prefix' => 'api/v1'), function()
   Route::resource('churches', 'ChurchesController');
   Route::resource('targets', 'TargetsController');
   Route::resource('actions', 'ActionsController');
+  Route::resource('settings', 'SettingsController');
   Route::controller('map', 'MapController');
 });
 

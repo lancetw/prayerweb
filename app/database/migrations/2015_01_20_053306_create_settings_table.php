@@ -18,7 +18,8 @@ class CreateSettingsTable extends Migration {
 
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('uuidx')->unique();
+			$table->string('email')->unique();
+			$table->string('subscription')->default(false);
 			$table->string('phone')->nullable();
 			$table->softDeletes();
 		});
