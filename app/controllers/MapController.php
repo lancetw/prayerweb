@@ -11,15 +11,10 @@ class MapController extends \BaseController {
     //$this->beforeFilter('auth.api');
   }
 
-  public function getIndex()
-  {
-    return 'map';
-  }
-
 
   // lat: 24.182984,
   // lng: 120.589952
-  public function postIndex()
+  public function anyIndex()
   {
     $in = Input::only('lat', 'lng');
     $out = Array();
@@ -50,13 +45,7 @@ class MapController extends \BaseController {
   }
 
 
-  public function getNearby()
-  {
-    return 'nearby';
-  }
-
-
-  public function postNearby($dist='1000')
+  public function anyNearby($dist='1000')
   {
     $in = Input::only('code', 'city', 'town', 'lat', 'lng');
     $out = Array();
