@@ -26,7 +26,7 @@ class ActionsController extends \BaseController {
    */
   public function store()
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 201;
     $in = Input::only('tid');
 

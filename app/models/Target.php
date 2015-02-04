@@ -20,7 +20,7 @@ class Target extends \Eloquent {
    *
    * @var array
    */
-  protected $hidden = array('deleted_at', 'created_at', 'updated_at', 'id');
+  protected $hidden = array('deleted_at', 'created_at', 'updated_at');
 
   public function user()
   {

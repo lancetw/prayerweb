@@ -37,7 +37,7 @@ class SettingsController extends \BaseController {
    */
   public function store()
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 201;
     $in = Input::only('email', 'subscription', 'phone');
 

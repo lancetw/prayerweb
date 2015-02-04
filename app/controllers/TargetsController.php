@@ -4,7 +4,7 @@ class TargetsController extends \BaseController {
 
   public function __construct()
   {
-    $this->beforeFilter('auth.api', array('except' => array('index', 'show')));
+    $this->beforeFilter('auth.api', array('except' => array('')));
   }
 
   /**
@@ -15,7 +15,12 @@ class TargetsController extends \BaseController {
    */
   public function index()
   {
-    return 'target';
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+    $response = Target::where('uid', $authId)->get();
+
+    return Response::json($response, $statusCode);
   }
 
   /**
@@ -26,7 +31,7 @@ class TargetsController extends \BaseController {
    */
   public function store()
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 201;
     $in = Input::only('name', 'mask', 'freq', 'sinner');
 
@@ -72,7 +77,12 @@ class TargetsController extends \BaseController {
    */
   public function show($id)
   {
-    //
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+    $response = Target::where(array('uid' => $authId, 'id' => $id))->first();
+
+    return Response::json($response, $statusCode);
   }
 
   /**
@@ -84,7 +94,7 @@ class TargetsController extends \BaseController {
    */
   public function update($id)
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 200;
 
     $in = Input::only('name', 'mask', 'freq', 'sinner', 'baptized', 'meeter', 'email', 'nick', 'church');
@@ -129,7 +139,7 @@ class TargetsController extends \BaseController {
    */
   public function destroy($id)
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 200;
 
     $authId = Auth::user()->id;

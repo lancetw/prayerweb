@@ -24,7 +24,7 @@ class ChurchesController extends \BaseController {
    */
   public function store()
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 201;
     $in = Input::only('name', 'lat', 'lng', 'cid');
 
@@ -49,8 +49,8 @@ class ChurchesController extends \BaseController {
           'uid' => Auth::user()->id
         );
         $statusCode = 201;
-        $response = UserChurch::firstOrCreate($relation);
-
+        UserChurch::firstOrCreate($relation);
+        $response = new stdClass;
         return Response::json($response, $statusCode);
       }
 
@@ -63,7 +63,8 @@ class ChurchesController extends \BaseController {
         'cid' => $church->id,
         'uid' => Auth::user()->id
       );
-      $response = UserChurch::create($relation);
+      UserChurch::firstOrCreate($relation);
+      $response = new stdClass;
     }
 
     return Response::json($response, $statusCode);

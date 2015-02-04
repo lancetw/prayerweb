@@ -24,7 +24,7 @@ class UsersController extends \BaseController {
    */
   public function store()
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 201;
     $in = Input::only('uuidx', 'email');
 
@@ -90,7 +90,7 @@ class UsersController extends \BaseController {
    */
   public function update($id)
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 200;
 
     $in = Input::only('uuidx', 'email');
@@ -134,7 +134,7 @@ class UsersController extends \BaseController {
    */
   public function destroy($id)
   {
-    $response = [];
+    $response = new stdClass;
     $statusCode = 200;
 
     $authId = Auth::user()->id;
