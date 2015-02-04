@@ -52,7 +52,7 @@ class ActionsController extends \BaseController {
 
       if ($uid == $authId) {
         $in['uid'] = Auth::user()->id;
-        $response = Action::create($in);
+        Action::create($in);
       } else {
         $statusCode = 401;
       }
