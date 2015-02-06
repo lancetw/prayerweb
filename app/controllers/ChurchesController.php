@@ -4,7 +4,7 @@ class ChurchesController extends \BaseController {
 
   public function __construct()
   {
-    $this->beforeFilter('auth.api', array('except' => array('index', 'show')));
+    $this->beforeFilter('auth.api', array('except' => array('show')));
   }
 
   /**
@@ -14,7 +14,19 @@ class ChurchesController extends \BaseController {
    */
   public function index()
   {
-    return 'churches';
+    $response = new stdClass;
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+
+    if ($authId) {
+       $cid = UserChurch::where(array('uid' => $authId))->pluck('cid');
+       $response = Church::find($cid);
+    } else {
+      $statusCode = 401;
+    }
+
+    return Response::json($response, $statusCode);
   }
 
   /**
@@ -30,8 +42,8 @@ class ChurchesController extends \BaseController {
 
     $rules = array(
       'name' => 'required | alpha_dash | unique:churches',
-      'lat'  => 'required | numeric',
-      'lng'  => 'required | numeric',
+      'lat'  => 'numeric',
+      'lng'  => 'numeric',
       'cid'  => 'integer'
     );
 
@@ -44,12 +56,20 @@ class ChurchesController extends \BaseController {
       if ($errs->has('name')) {
         // 教會已有建檔，嘗試建立教會與使用者之間的關係
         $cid = Church::where('name', $in['name'])->pluck('id');
-        $relation = array(
-          'cid' => $cid,
-          'uid' => Auth::user()->id
-        );
         $statusCode = 201;
-        UserChurch::firstOrCreate($relation);
+        // 先檢查是否已經加入教會
+        $uc_ = UserChurch::where('uid', Auth::user()->id)->first();
+        if ($uc_ && $uc_->uid === Auth::user()->id) {
+          $uc = UserChurch::find($uc_->id);
+          $uc->cid = $cid;
+          $uc->save();
+        } else {
+          $relation = array(
+            'cid' => $cid,
+            'uid' => Auth::user()->id
+          );
+          UserChurch::firstOrCreate($relation);
+        }
         $response = new stdClass;
         return Response::json($response, $statusCode);
       }
@@ -58,12 +78,20 @@ class ChurchesController extends \BaseController {
       $in['qlink'] = XUtil::makeQlink($in['name']);
       $church = Church::create($in);
 
-      // 建立教會與使用者之間的關係
-      $relation = array(
-        'cid' => $church->id,
-        'uid' => Auth::user()->id
-      );
-      UserChurch::firstOrCreate($relation);
+      // 先檢查是否已經加入教會
+      $uc_ = UserChurch::where('uid', Auth::user()->id)->first();
+      if ($uc_ && $uc_->uid === Auth::user()->id) {
+        $uc = UserChurch::find($uc_->id);
+        $uc->cid = $church->id;
+        $uc->save();
+      } else {
+        // 建立教會與使用者之間的關係
+        $relation = array(
+          'cid' => $church->id,
+          'uid' => Auth::user()->id
+        );
+        UserChurch::firstOrCreate($relation);
+      }
       $response = new stdClass;
     }
 

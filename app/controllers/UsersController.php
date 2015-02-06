@@ -4,7 +4,7 @@ class UsersController extends \BaseController {
 
   public function __construct()
   {
-    $this->beforeFilter('auth.api', array('except' => array('index', 'show', 'store')));
+    $this->beforeFilter('auth.api', array('except' => array('store')));
   }
 
   /**
@@ -14,7 +14,18 @@ class UsersController extends \BaseController {
    */
   public function index()
   {
-    return 'users';
+    $response = new stdClass;
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+
+    if ($authId) {
+      $response = User::find($authId);
+    } else {
+      $statusCode = 401;
+    }
+
+    return Response::json($response, $statusCode);
   }
 
   /**
@@ -78,7 +89,18 @@ class UsersController extends \BaseController {
    */
   public function show($id)
   {
-    return 'user';
+    $response = new stdClass;
+    $statusCode = 200;
+
+    $authId = Auth::user()->id;
+
+    if ($id === $authId) {
+      $response = User::find($id);
+    } else {
+      $statusCode = 401;
+    }
+
+    return Response::json($response, $statusCode);
   }
 
 
