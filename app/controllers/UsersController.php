@@ -59,6 +59,9 @@ class UsersController extends \BaseController {
           $statusCode = 403;
           $response = $errs->all();
         }
+      } else {
+        $statusCode = 400;
+        $response = $errs->all();
       }
 
     } else {
