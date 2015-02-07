@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('uuidx')->unique();
+			$table->string('uuidx');
 			$table->string('email');
 			$table->integer('seed')->unsigned();
 			$table->boolean('status')->default(false);

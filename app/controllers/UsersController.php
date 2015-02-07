@@ -40,7 +40,7 @@ class UsersController extends \BaseController {
     $in = Input::only('uuidx', 'email');
 
     $rules = array(
-      'uuidx' => 'required | alpha_dash | unique:users',
+      'uuidx' => 'required | alpha_dash',
       'email' => 'required | email | unique:users'
     );
 
@@ -48,20 +48,13 @@ class UsersController extends \BaseController {
     if($vd->fails()) {
       $errs = $vd->messages();
 
-      if ($errs->has('uuidx') || $errs->has('email')) {
+      if ($errs->has('email')) {
+        $credentials['email'] = $in['email'];
+        $credentials['password'] = $in['uuidx'];
 
-        if ($errs->has('email')) {
-
-          $credentials['email'] = $in['email'];
-          $credentials['password'] = $in['uuidx'];
-
-          if (Auth::attempt($credentials, false)) {
-            $statusCode = 200;
-            $response = Auth::user();
-          } else {
-            $statusCode = 403;
-            $response = $errs->all();
-          }
+        if (Auth::attempt($credentials, false)) {
+          $statusCode = 200;
+          $response = Auth::user();
         } else {
           $statusCode = 403;
           $response = $errs->all();
