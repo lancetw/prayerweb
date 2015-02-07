@@ -56,7 +56,7 @@ class UsersController extends \BaseController {
           $statusCode = 200;
           $response = Auth::user();
         } else {
-          $statusCode = 403;
+          $statusCode = 400;
           $response = $errs->all();
         }
       } else {
