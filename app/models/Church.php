@@ -21,7 +21,7 @@ class Church extends \Eloquent {
    *
    * @var array
    */
-  protected $hidden = array('id', 'deleted_at', 'cid', 'created_at', 'updated_at');
+  protected $hidden = array('id', 'cid', 'deleted_at', 'created_at', 'updated_at');
 
 
 }
