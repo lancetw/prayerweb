@@ -50,8 +50,16 @@ class ActionsController extends \BaseController {
         )
       )->pluck('uid');
 
+      // 取得使用者的教會
+      $cid = UserChurch::where(
+        array(
+          'uid' => $authId
+        )
+      )->pluck('cid');
+
       if ($uid == $authId) {
         $in['uid'] = Auth::user()->id;
+        $in['cid'] = $cid;
         Action::create($in);
       } else {
         $statusCode = 401;

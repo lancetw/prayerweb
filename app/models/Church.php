@@ -23,5 +23,9 @@ class Church extends \Eloquent {
    */
   protected $hidden = array('id', 'cid', 'deleted_at', 'created_at', 'updated_at');
 
+  public function users()
+  {
+    return $this->hasMany('Users');
+  }
 
 }

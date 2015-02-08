@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Carbon\Carbon;
 
 class UserChurch extends \Eloquent {
 
@@ -22,6 +23,72 @@ class UserChurch extends \Eloquent {
    * @var array
    */
   protected $hidden = array('deleted_at', 'created_at', 'updated_at');
+
+  public function scopeToday($query)
+  {
+    return $query->where('created_at', '>', Carbon::today()->startOfDay())
+                 ->where('created_at', '<', Carbon::today()->endOfDay())
+                 ->get();
+  }
+
+  public function scopeGroupTodayByHours($query)
+  {
+    return $query
+      ->where('created_at', '>', Carbon::today()->startOfDay())
+      ->where('created_at', '<', Carbon::today()->endOfDay())
+      ->get()
+      ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('G');
+      });
+  }
+
+
+  public function scopeGroupLastWeekByDays($query)
+  {
+    return $query
+      ->where('created_at', '>', Carbon::now()->subWeek()->startOfWeek())
+      ->where('created_at', '<', Carbon::now()->subWeek()->endOfWeek())
+      ->get()
+      ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('w');
+      });
+  }
+
+
+  public function scopeGroupMonthByDays($query)
+  {
+    return $query
+      ->where('created_at', '>', Carbon::now()->startOfMonth())
+      ->where('created_at', '<', Carbon::now()->endOfMonth())
+      ->get()
+      ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('j');
+      });
+  }
+
+
+  public function scopeGroupMonthByMonths($query)
+  {
+    return $query
+      ->where('created_at', '>', Carbon::now()->startOfYear())
+      ->where('created_at', '<', Carbon::now()->endOfYear())
+      ->get()
+      ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('n');
+      });
+  }
+
+
+  public function scopeGroupMonthByWeeks($query)
+  {
+    return $query
+      ->where('created_at', '>', Carbon::now()->startOfMonth())
+      ->where('created_at', '<', Carbon::now()->endOfMonth())
+      ->get()
+      ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->weekOfMonth;
+      });
+  }
 
 }
 

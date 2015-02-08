@@ -20,6 +20,7 @@ class CreateActionsTable extends Migration {
 			$table->timestamps();
 			$table->integer('uid')->unsigned()->index();
 			$table->integer('tid')->unsigned()->index();
+			$table->integer('cid')->unsigned()->index();
 			$table->softDeletes();
 		});
 	}
