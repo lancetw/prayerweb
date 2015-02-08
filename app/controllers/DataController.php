@@ -39,9 +39,9 @@ class DataController extends \BaseController {
     $vd = Validator::make($in, $rules);
     if($vd->fails()) return;
 
-    $cid = Church::where('qlink', $in['qlink'])->pluck('id');
-    if ($cid) {
-      $out['count'] = Target::all()->count();
+    $church = Church::where('qlink', $in['qlink'])->first();
+    if ($church) {
+      $out['count'] = $church->targets()->count();
     }
 
     return Response::json($out);
@@ -62,7 +62,7 @@ class DataController extends \BaseController {
 
     $cid = Church::where('qlink', $in['qlink'])->pluck('id');
     if ($cid) {
-      $out['count_today'] = Action::today()->count();
+      $out['count_today'] = Action::where('cid', $cid)->today()->count();
     }
 
     return Response::json($out);
@@ -290,6 +290,27 @@ class DataController extends \BaseController {
 
       $out['statistic_actions_month_by_weeks'] =  $actions;
       $out['statistic_users_month_by_weeks'] =  $users;
+    }
+
+    return Response::json($out);
+  }
+
+
+  public function getTargetList()
+  {
+    $in = Input::only('qlink');
+    $out = Array();
+
+    $rules = array(
+        'qlink' => 'required | alpha_num'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+
+    $cid = Church::where('qlink', $in['qlink'])->pluck('id');
+    if ($cid) {
+      $out['count'] = Target::where('cid', $cid)->get()->count();
     }
 
     return Response::json($out);

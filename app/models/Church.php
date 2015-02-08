@@ -28,4 +28,10 @@ class Church extends \Eloquent {
     return $this->hasMany('Users');
   }
 
+
+  public function targets()
+  {
+    return $this->hasManyThrough('Target', 'UserChurch', 'cid', 'id');
+  }
+
 }
