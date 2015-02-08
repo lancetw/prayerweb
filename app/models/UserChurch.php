@@ -90,5 +90,6 @@ class UserChurch extends \Eloquent {
       });
   }
 
+
 }
 

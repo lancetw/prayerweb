@@ -7,6 +7,7 @@ class DataController extends \BaseController {
   public function __construct()
   {
     //$this->beforeFilter('auth.api');
+    $this->cache_time = 0;
   }
 
   public function getIndex()
@@ -21,7 +22,7 @@ class DataController extends \BaseController {
     $vd = Validator::make($in, $rules);
     if($vd->fails()) return;
 
-    $out = Church::where('qlink', $in['qlink'])->first();
+    $out = Church::where('qlink', $in['qlink'])->remember($this->cache_time)->first();
 
     return Response::json($out);
   }
@@ -165,14 +166,14 @@ class DataController extends \BaseController {
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
       $actions = array_fill(1, 7, null);
-      foreach (Action::where('cid', $cid)->groupLastWeekByDays() as $k => $v) {
+      foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupLastWeekByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
       $users = array_fill(1, 7, null);
-      foreach (UserChurch::where('cid', $cid)->groupLastWeekByDays() as $k => $v) {
+      foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupLastWeekByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
         }
@@ -201,14 +202,14 @@ class DataController extends \BaseController {
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
       $actions = array_fill(1, 31, null);
-      foreach (Action::where('cid', $cid)->groupMonthByDays() as $k => $v) {
+      foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupMonthByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
       $users = array_fill(1, 31, null);
-      foreach (UserChurch::where('cid', $cid)->groupMonthByDays() as $k => $v) {
+      foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupMonthByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
         }
@@ -238,14 +239,14 @@ class DataController extends \BaseController {
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
       $actions = array_fill(1, 12, null);
-      foreach (Action::where('cid', $cid)->groupMonthByMonths() as $k => $v) {
+      foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupMonthByMonths() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
       $users = array_fill(1, 12, null);
-      foreach (UserChurch::where('cid', $cid)->groupMonthByMonths() as $k => $v) {
+      foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupMonthByMonths() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
         }
@@ -275,14 +276,14 @@ class DataController extends \BaseController {
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
       $actions = array_fill(1, 5, null);
-      foreach (Action::where('cid', $cid)->groupMonthByWeeks() as $k => $v) {
+      foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupMonthByWeeks() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
       $users = array_fill(1, 5, null);
-      foreach (UserChurch::where('cid', $cid)->groupMonthByWeeks() as $k => $v) {
+      foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupMonthByWeeks() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
         }
@@ -296,7 +297,7 @@ class DataController extends \BaseController {
   }
 
 
-  public function getTargetall()
+  public function getTargetall($per = 20)
   {
     $in = Input::only('qlink');
     $out = Array();
@@ -310,14 +311,20 @@ class DataController extends \BaseController {
 
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($church) {
-      $out = $church->targets()->get();
+      $rdata = $church->targets()->remember($this->cache_time)->get()->each(function ($item) {
+        $item->setHidden(['cid', 'id', 'uid', 'name', 'deleted_at', 'updated_at']);
+      })->toArray();
+
+      $current = Input::get('page') - 1;
+      $data = array_slice($rdata, $current * $per, $per);
+      $out = Paginator::make($data, count($rdata), $per);
     }
 
     return Response::json($out);
   }
 
 
-  public function getBustedall()
+  public function getBustedall($per = 20)
   {
     $in = Input::only('qlink');
     $out = Array();
@@ -331,10 +338,15 @@ class DataController extends \BaseController {
 
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($church) {
-      $out = $church->busteds()->get();
+      $rdata = $church->busteds()->remember($this->cache_time)->get();
+
+      $current = Input::get('page') - 1;
+      $data = array_slice($rdata, $current * $per, $per);
+      $out = Paginator::make($data, count($rdata), $per)->toJson();
     }
 
     return Response::json($out);
   }
+
 
 }

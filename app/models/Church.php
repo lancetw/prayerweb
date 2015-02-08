@@ -39,4 +39,10 @@ class Church extends \Eloquent {
   {
     return $this->hasManyThrough('Busted', 'UserChurch', 'cid', 'id');
   }
+
+  public function newCollection(array $models = array())
+  {
+      return new Extensions\ChurchCollection($models);
+  }
 }
+
