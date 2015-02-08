@@ -164,14 +164,14 @@ class DataController extends \BaseController {
     $cid = Church::where('qlink', $in['qlink'])->pluck('id');
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
-      $actions = array_fill(0, 7, null);
+      $actions = array_fill(1, 7, null);
       foreach (Action::where('cid', $cid)->groupLastWeekByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
-      $users = array_fill(0, 7, null);
+      $users = array_fill(1, 7, null);
       foreach (UserChurch::where('cid', $cid)->groupLastWeekByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
