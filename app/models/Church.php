@@ -34,4 +34,9 @@ class Church extends \Eloquent {
     return $this->hasManyThrough('Target', 'UserChurch', 'cid', 'id');
   }
 
+
+  public function busteds()
+  {
+    return $this->hasManyThrough('Busted', 'UserChurch', 'cid', 'id');
+  }
 }

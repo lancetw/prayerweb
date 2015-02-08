@@ -296,7 +296,7 @@ class DataController extends \BaseController {
   }
 
 
-  public function getTargetList()
+  public function getTargetall()
   {
     $in = Input::only('qlink');
     $out = Array();
@@ -308,9 +308,30 @@ class DataController extends \BaseController {
     $vd = Validator::make($in, $rules);
     if($vd->fails()) return;
 
-    $cid = Church::where('qlink', $in['qlink'])->pluck('id');
-    if ($cid) {
-      $out['count'] = Target::where('cid', $cid)->get()->count();
+    $church = Church::where('qlink', $in['qlink'])->first();
+    if ($church) {
+      $out = $church->targets()->get();
+    }
+
+    return Response::json($out);
+  }
+
+
+  public function getBustedall()
+  {
+    $in = Input::only('qlink');
+    $out = Array();
+
+    $rules = array(
+        'qlink' => 'required | alpha_num'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+
+    $church = Church::where('qlink', $in['qlink'])->first();
+    if ($church) {
+      $out = $church->busteds()->get();
     }
 
     return Response::json($out);
