@@ -62,7 +62,7 @@ class ActionsController extends \BaseController {
         $in['cid'] = $cid;
         Action::create($in);
       } else {
-        $statusCode = 401;
+        $statusCode = 403;
       }
 
     }

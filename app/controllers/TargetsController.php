@@ -112,7 +112,7 @@ class TargetsController extends \BaseController {
     $vd = Validator::make($in, $rules);
     if($vd->fails()) {
       $errs = $vd->messages();
-      $statusCode = 401;
+      $statusCode = 403;
       $response = $errs->all();
     } else {
       $authId = Auth::user()->id;
@@ -123,7 +123,7 @@ class TargetsController extends \BaseController {
           $statusCode = 304;
         }
       } else {
-        $statusCode = 401;
+        $statusCode = 403;
       }
     }
 
@@ -151,7 +151,7 @@ class TargetsController extends \BaseController {
       $target->forceDelete();
 
     } else {
-      $statusCode = 401;
+      $statusCode = 403;
     }
 
     return Response::json($response, $statusCode);

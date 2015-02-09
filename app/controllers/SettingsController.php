@@ -81,7 +81,7 @@ class SettingsController extends \BaseController {
       if ($email == $in['email']) {
         $response = Setting::firstOrCreate($in);
       } else {
-        $statusCode = 401;
+        $statusCode = 403;
       }
     }
 
