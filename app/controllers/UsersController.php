@@ -4,7 +4,7 @@ class UsersController extends \BaseController {
 
   public function __construct()
   {
-    $this->beforeFilter('auth.api', array('except' => array('index', 'store')));
+    $this->beforeFilter('auth.api', array('except' => array('store')));
   }
 
   /**
