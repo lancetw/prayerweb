@@ -52,7 +52,7 @@ class UsersController extends \BaseController {
         $credentials['email'] = $in['email'];
         $credentials['password'] = $in['uuidx'];
 
-        if (Auth::attempt($credentials, false)) {
+        if (Auth::validate($credentials)) {
           $statusCode = 200;
           $response = Auth::user();
         } else {
