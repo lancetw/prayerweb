@@ -22,7 +22,7 @@ class UsersController extends \BaseController {
     if ($authId) {
       $response = User::find($authId);
     } else {
-      $statusCode = 401;
+      $statusCode = 403;
     }
 
     return Response::json($response, $statusCode);
@@ -123,7 +123,7 @@ class UsersController extends \BaseController {
       $errs = $vd->messages();
 
       if ($errs->has('uuidx') || $errs->has('email')) {
-        $statusCode = 401;
+        $statusCode = 403;
         $response = $errs->all();
       }
     } else {
@@ -136,7 +136,7 @@ class UsersController extends \BaseController {
 
         $response = $user;
       } else {
-        $statusCode = 401;
+        $statusCode = 403;
       }
     }
 
@@ -161,7 +161,7 @@ class UsersController extends \BaseController {
       $user = User::find($id);
       $user->delete();
     } else {
-      $statusCode = 401;
+      $statusCode = 403;
     }
 
     return Response::json($response, $statusCode);
