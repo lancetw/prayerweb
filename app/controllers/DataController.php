@@ -297,7 +297,7 @@ class DataController extends \BaseController {
   }
 
 
-  public function getTargetall($per = 20)
+  public function getTargetall($per = 5)
   {
     $in = Input::only('qlink');
     $out = Array();
@@ -324,7 +324,7 @@ class DataController extends \BaseController {
   }
 
 
-  public function getBustedall($per = 20)
+  public function getBustedall($per = 5)
   {
     $in = Input::only('qlink');
     $out = Array();
