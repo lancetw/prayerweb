@@ -21,8 +21,6 @@ class UsersController extends \BaseController {
 
     if ($authId) {
       $response = User::find($authId);
-    } else {
-      $statusCode = 403;
     }
 
     return Response::json($response, $statusCode);
