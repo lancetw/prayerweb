@@ -179,8 +179,8 @@ class DataController extends \BaseController {
         }
       };
 
-      $out['statistic_actions_lastweek'] =  $actions;
-      $out['statistic_users_lastweek'] =  $users;
+      $out['statistic_actions_lastweek'] =  array_values($actions);
+      $out['statistic_users_lastweek'] =  array_values($users);
     }
 
     return Response::json($out);
@@ -215,8 +215,8 @@ class DataController extends \BaseController {
         }
       };
 
-      $out['statistic_actions_month'] =  $actions;
-      $out['statistic_users_month'] =  $users;
+      $out['statistic_actions_month'] =  array_values($actions);
+      $out['statistic_users_month'] =  array_values($users);
     }
 
     return Response::json($out);
@@ -252,8 +252,8 @@ class DataController extends \BaseController {
         }
       };
 
-      $out['statistic_actions_year'] =  $actions;
-      $out['statistic_users_year'] =  $users;
+      $out['statistic_actions_year'] =  array_values($actions);
+      $out['statistic_users_year'] =  array_values($users);
     }
 
     return Response::json($out);
@@ -289,8 +289,8 @@ class DataController extends \BaseController {
         }
       };
 
-      $out['statistic_actions_month_by_weeks'] =  $actions;
-      $out['statistic_users_month_by_weeks'] =  $users;
+      $out['statistic_actions_month_by_weeks'] =  array_values($actions);
+      $out['statistic_users_month_by_weeks'] =  array_values($users);
     }
 
     return Response::json($out);
