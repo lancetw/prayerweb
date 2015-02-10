@@ -23,7 +23,7 @@ class ChurchesController extends \BaseController {
        $cid = UserChurch::where(array('uid' => $authId))->pluck('cid');
        $response = Church::find($cid);
     } else {
-      $statusCode = 401;
+      $statusCode = 403;
     }
 
     return Response::json($response, $statusCode);
