@@ -344,7 +344,7 @@ class DataController extends \BaseController {
 
       $current = Input::get('page') - 1;
       $data = array_slice($rdata, $current * $per, $per);
-      $out = Paginator::make($data, count($rdata), $per)->toJson();
+      $out = Paginator::make($data, count($rdata), $per);
     }
 
     return Response::json($out);
