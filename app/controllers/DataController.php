@@ -165,14 +165,14 @@ class DataController extends \BaseController {
     $cid = Church::where('qlink', $in['qlink'])->pluck('id');
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
-      $actions = array_fill(1, 7, null);
+      $actions = array_fill(1, 7, '');
       foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupLastWeekByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
-      $users = array_fill(1, 7, null);
+      $users = array_fill(1, 7, '');
       foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupLastWeekByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
@@ -201,14 +201,14 @@ class DataController extends \BaseController {
     $cid = Church::where('qlink', $in['qlink'])->pluck('id');
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
-      $actions = array_fill(1, 31, null);
+      $actions = array_fill(1, 31, '');
       foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupMonthByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
-      $users = array_fill(1, 31, null);
+      $users = array_fill(1, 31, '');
       foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupMonthByDays() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
@@ -238,14 +238,14 @@ class DataController extends \BaseController {
     $cid = Church::where('qlink', $in['qlink'])->pluck('id');
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
-      $actions = array_fill(1, 12, null);
+      $actions = array_fill(1, 12, '');
       foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupMonthByMonths() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
-      $users = array_fill(1, 12, null);
+      $users = array_fill(1, 12, '');
       foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupMonthByMonths() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
@@ -275,14 +275,14 @@ class DataController extends \BaseController {
     $cid = Church::where('qlink', $in['qlink'])->pluck('id');
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($cid) {
-      $actions = array_fill(1, 5, null);
+      $actions = array_fill(1, 5, '');
       foreach (Action::where('cid', $cid)->remember($this->cache_time)->groupMonthByWeeks() as $k => $v) {
         foreach ($v as $key => $value) {
           $actions[$k]++;
         }
       };
 
-      $users = array_fill(1, 5, null);
+      $users = array_fill(1, 5, '');
       foreach (UserChurch::where('cid', $cid)->remember($this->cache_time)->groupMonthByWeeks() as $k => $v) {
         foreach ($v as $key => $value) {
           $users[$k]++;
