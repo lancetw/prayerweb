@@ -1,6 +1,6 @@
 <?php
 
-class LogController extends \BaseController {
+class LogsController extends \BaseController {
 
   public function __construct()
   {
