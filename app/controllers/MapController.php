@@ -79,6 +79,11 @@ class MapController extends \BaseController {
       $out = $this->mapInfo_($in);
     }
 
+    $per = 20;
+    $current = Input::get('page') - 1;
+    $data = array_slice($out, $current * $per, $per);
+    $out = Paginator::make($data, count($out), $per);
+
     return Response::json($out);
   }
 
