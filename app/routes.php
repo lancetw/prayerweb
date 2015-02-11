@@ -29,7 +29,7 @@ Route::group(array('prefix' => 'api/v1'), function()
   Route::resource('statistics', 'StatisticsController');
   Route::controller('map', 'MapController');
   Route::controller('data', 'DataController');
-  Route::post('logs', 'LogsController@store');
+  Route::post('logs', 'NgLogsController@store');
 });
 
 

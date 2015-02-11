@@ -1,6 +1,6 @@
 <?php
 
-class LogsController extends \BaseController {
+class NgLogsController extends \BaseController {
 
   public function __construct()
   {
@@ -34,7 +34,7 @@ class LogsController extends \BaseController {
       $authId = Auth::user()->id;
       $in['uid'] = $authId;
 
-      $response = Log::create($in);
+      $response = NgLog::create($in);
     }
 
     return Response::json($response, $statusCode);

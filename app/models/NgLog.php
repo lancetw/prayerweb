@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Log extends \Eloquent {
-
+class NgLog extends \Eloquent {
   use SoftDeletingTrait;
 
   protected $dates = ['deleted_at'];
