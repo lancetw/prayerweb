@@ -19,7 +19,7 @@ class LogsController extends \BaseController {
     $in = Input::only('email', 'uuidx', 'type', 'data', 'info');
     $rules = array(
       'email' => 'required | email',
-      'uudix' => 'required | alpha_dash',
+      'uuidx' => 'required | alpha_dash',
       'type'  => 'required',
       'data'  => 'required',
       'info'  => 'required'
