@@ -26,6 +26,7 @@ Route::group(array('prefix' => 'api/v1'), function()
   Route::resource('targets', 'TargetsController');
   Route::resource('actions', 'ActionsController');
   Route::resource('settings', 'SettingsController');
+  Route::resource('logs', 'LogsController');
   Route::resource('statistics', 'StatisticsController');
   Route::controller('map', 'MapController');
   Route::controller('data', 'DataController');
