@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Church extends \Eloquent {
+class Log extends \Eloquent {
 
   use SoftDeletingTrait;
 
