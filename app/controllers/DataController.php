@@ -362,23 +362,23 @@ class DataController extends \BaseController {
     $vd = Validator::make($in, $rules);
     if($vd->fails()) return;
 
-    $church = Church::where('qlink', $in['qlink'])->first();
-    $church->whereHas('targets' => function ($q) {
-      $q->where('sinner', '=', true);
-    });
-    $sinners = $church->targets()->get()->count();
+    $church = Church::whereHas('qlink', function ($q) {
+      $q->where('sinner', '=', true)
+        ->where('qlink', $in['qlink']);
+    })->first();
+    $sinners = $church->targets()->count();
 
-    $church = Church::where('qlink', $in['qlink'])->first();
-    $church->whereHas['targets' => function ($q) {
-      $q->where('baptized', '=', true);
-    });
-    $baptizeds = $church->targets()->get()->count();
+    $church = Church::whereHas('qlink', function ($q) {
+      $q->where('baptized', '=', true)
+        ->where('qlink', $in['qlink']);
+    })->first();
+    $baptizeds = $church->targets()->count();
 
-    $church = Church::where('qlink', $in['qlink'])->first();
-    $church->whereHas['targets' => function ($q) {
-      $q->where('meeter', '=', true);
-    });
-    $meeters = $church->targets()->get()->count();
+    $church = Church::whereHas('qlink', function ($q) {
+      $q->where('metter', '=', true)
+        ->where('qlink', $in['qlink']);
+    })->first();
+    $meeters = $church->targets()->count();
 
     if ($church) {
       $out = array(
