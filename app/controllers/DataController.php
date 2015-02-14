@@ -363,21 +363,21 @@ class DataController extends \BaseController {
     if($vd->fails()) return;
 
     $church = Church::where('qlink', $in['qlink'])->first();
-    $church->load(['targets' => function ($q) {
+    $church->whereHas('targets' => function ($q) {
       $q->where('sinner', '=', true);
-    }]);
+    });
     $sinners = $church->targets()->get()->count();
 
     $church = Church::where('qlink', $in['qlink'])->first();
-    $church->load(['targets' => function ($q) {
+    $church->whereHas['targets' => function ($q) {
       $q->where('baptized', '=', true);
-    }]);
+    });
     $baptizeds = $church->targets()->get()->count();
 
     $church = Church::where('qlink', $in['qlink'])->first();
-    $church->load(['targets' => function ($q) {
+    $church->whereHas['targets' => function ($q) {
       $q->where('meeter', '=', true);
-    }]);
+    });
     $meeters = $church->targets()->get()->count();
 
     if ($church) {
