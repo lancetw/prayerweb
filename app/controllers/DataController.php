@@ -366,19 +366,19 @@ class DataController extends \BaseController {
     $church->load(['targets' => function ($q) {
       $q->where('sinner', '=', true);
     }]);
-    $sinners = $church->targets()->count();
+    $sinners = $church->targets()->get()->count();
 
     $church = Church::where('qlink', $in['qlink'])->first();
     $church->load(['targets' => function ($q) {
       $q->where('baptized', '=', true);
     }]);
-    $baptizeds = $church->targets()->count();
+    $baptizeds = $church->targets()->get()->count();
 
     $church = Church::where('qlink', $in['qlink'])->first();
     $church->load(['targets' => function ($q) {
       $q->where('meeter', '=', true);
     }]);
-    $meeters = $church->targets()->count();
+    $meeters = $church->targets()->get()->count();
 
     if ($church) {
       $out = array(
