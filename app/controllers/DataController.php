@@ -350,4 +350,29 @@ class DataController extends \BaseController {
   }
 
 
+  public function getInfo()
+  {
+    $in = Input::only('qlink');
+    $out = Array();
+
+    $rules = array(
+        'qlink' => 'required | alpha_num'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+
+    $church = Church::where('qlink', $in['qlink'])->first();
+    if ($church) {
+      $out = array(
+        'sinner' => $church->targets()->where('sinner', true)->select('sinner')->count(),
+        'baptized' => $church->targets()->where('sinner', true)->select('baptized')->count(),
+        'meeter' => $church->targets()->where('sinner', true)->select('meeter')->count()
+      );
+    }
+
+    return Response::json($out);
+  }
+
+
 }

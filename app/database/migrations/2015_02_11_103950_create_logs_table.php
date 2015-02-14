@@ -21,7 +21,7 @@ class CreateLogsTable extends Migration {
 			$table->string('uuidx');
 			$table->string('email');
 			$table->string('type');
-			$table->string('data');
+			$table->longText('data');
 			$table->string('info');
 			$table->timestamps();
 		});
