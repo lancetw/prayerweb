@@ -362,19 +362,19 @@ class DataController extends \BaseController {
     $vd = Validator::make($in, $rules);
     if($vd->fails()) return;
 
-    $church = Church::whereHas('qlink', function ($q) {
+    $church = Church::whereHas('targets', function ($q) {
       $q->where('sinner', '=', true)
         ->where('qlink', $in['qlink']);
     })->first();
     $sinners = $church->targets()->count();
 
-    $church = Church::whereHas('qlink', function ($q) {
+    $church = Church::whereHas('targets', function ($q) {
       $q->where('baptized', '=', true)
         ->where('qlink', $in['qlink']);
     })->first();
     $baptizeds = $church->targets()->count();
 
-    $church = Church::whereHas('qlink', function ($q) {
+    $church = Church::whereHas('targets', function ($q) {
       $q->where('metter', '=', true)
         ->where('qlink', $in['qlink']);
     })->first();
