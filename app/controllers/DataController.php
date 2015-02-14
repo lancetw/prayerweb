@@ -375,7 +375,7 @@ class DataController extends \BaseController {
     $baptizeds = $church->targets()->count();
 
     $church = Church::whereHas('targets', function ($q) use($in) {
-      $q->where('metter', '=', true)
+      $q->where('meeter', '=', true)
         ->where('qlink', $in['qlink']);
     })->first();
     $meeters = $church->targets()->count();
