@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Carbon\Carbon;
 
 class Church extends \Eloquent {
 
@@ -40,9 +41,18 @@ class Church extends \Eloquent {
     return $this->hasManyThrough('Busted', 'UserChurch', 'cid', 'uid');
   }
 
+
   public function newCollection(array $models = array())
   {
       return new Extensions\ChurchCollection($models);
   }
-}
 
+
+  public function scopeYesterday($query)
+  {
+    return $query->where('created_at', '>', Carbon::yesterday()->startOfDay())
+                 ->where('created_at', '<', Carbon::yesterday()->endOfDay())
+                 ->get();
+  }
+
+}

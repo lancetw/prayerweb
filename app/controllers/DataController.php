@@ -379,4 +379,48 @@ class DataController extends \BaseController {
   }
 
 
+  public function getNewchurches()
+  {
+    //$in = Input::only('date');
+    $out = Array();
+
+    /*$rules = array(
+        'date' => 'required | date'
+    );*/
+
+    /*$vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+    */
+
+    $out = Church::yesterday();
+
+    return Response::json($out);
+  }
+
+  public function getNewchurchesmail()
+  {
+    $churches = Church::yesterday();
+
+    $data['churches'] = $churches;
+
+    return View::make('emails.dailynewchurches', $data);
+
+  }
+
+
+  public function getMailtest()
+  {
+    $churches = Church::yesterday();
+
+    if ($churches && $churches->count() > 0) {
+      $data['churches'] = $churches;
+      Mail::send('emails.dailynewchurches', $data, function($message)
+      {
+        // 測試
+        $message->to('lancetw@gmail.com', '一領一禱告認領同工')->subject('一領一禱告認領：新加入教會通知');
+      });
+    }
+  }
+
+
 }
