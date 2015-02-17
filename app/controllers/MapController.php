@@ -88,6 +88,29 @@ class MapController extends \BaseController {
   }
 
 
+  function anySearch()
+  {
+    $in = Input::only('keyword');
+    $out = Array();
+
+    $rules = array(
+        'keyword' => 'required'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+
+    $out = $this->mapSearch_($in);
+
+    $per = 20;
+    $current = Input::get('page') - 1;
+    $data = array_slice($out, $current * $per, $per);
+    $out = Paginator::make($data, count($out), $per);
+
+    return Response::json($out);
+  }
+
+
   function getSort_(&$rdata, $lat, $lng)
   {
     usort($rdata, function ($a, $b) use ($lat, $lng) {
@@ -156,6 +179,19 @@ class MapController extends \BaseController {
     $rdata = cURL::get($url);
     $data = json_decode($rdata, true);
     $body = JSONH::parse($data['geoinfo']);
+
+    return $body;
+  }
+
+
+  function mapSearch_($in)
+  {
+    $mapOptions = array(
+      'keyword' => $in['keyword'],
+    );
+    $url = cURL::buildUrl('http://church.oursweb.net/lite/mapsearch', $mapOptions);
+    $data = cURL::get($url);
+    $body = json_decode($data, true);
 
     return $body;
   }
