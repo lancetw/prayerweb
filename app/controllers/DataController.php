@@ -337,7 +337,7 @@ class DataController extends \BaseController {
 
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($church) {
-      $rdata = $church->busteds->orderBy('created_at', 'DESC')->get()->each(function ($item) {
+      $rdata = $church->busteds()->orderBy('created_at', 'DESC')->get()->each(function ($item) {
         $item->setHidden(['cid', 'id', 'uid', 'name', 'deleted_at', 'updated_at']);
       })->toArray();
 
