@@ -32,13 +32,13 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->users->targets();
+    return $this->users()->targets();
   }
 
 
   public function busteds()
   {
-    return $this->users->busteds();
+    return $this->users()->busteds();
   }
 
 
