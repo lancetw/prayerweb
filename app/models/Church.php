@@ -26,7 +26,7 @@ class Church extends \Eloquent {
 
   public function users()
   {
-    return $this->hasMany('User');
+    return $this->hasManyThough('User', 'UserChurches', 'cid', 'id');
   }
 
 
