@@ -26,7 +26,7 @@ class Church extends \Eloquent {
 
   public function users()
   {
-    return $this->belongsToMany('User', 'user_churches', 'cid', 'id');
+    return $this->belongsToMany('User', 'user_churches', 'cid', 'uid');
   }
 
   public function newCollection(array $models = array())

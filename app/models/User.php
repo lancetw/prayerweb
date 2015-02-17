@@ -47,9 +47,4 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
     return $this->hasMany('busteds', 'uid', 'id');
   }
 
-  public function church()
-  {
-    return $this->belongsTo('UserChurch', 'uid');
-  }
-
 }
