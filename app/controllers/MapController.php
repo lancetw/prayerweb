@@ -191,8 +191,8 @@ class MapController extends \BaseController {
     );
     $url = cURL::buildUrl('http://church.oursweb.net/lite/mapsearch', $mapOptions);
     $rdata = cURL::get($url);
-    $data = $rdata['geoinfo'];
-    $body = json_decode($data, true);
+    $data = json_decode($data, true);
+    $body = $data['geoinfo'];
 
     return $body;
   }
