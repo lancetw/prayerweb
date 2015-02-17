@@ -32,13 +32,13 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->users()->targets();
+    return $this->belongsToMany('Target', 'user_churches', 'cid', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->users()->busteds();
+    return $this->belongsToMany('Busted', 'user_churches', 'cid', 'uid');
   }
 
 
