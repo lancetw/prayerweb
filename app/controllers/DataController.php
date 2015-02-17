@@ -417,7 +417,7 @@ class DataController extends \BaseController {
       Mail::send('emails.dailynewchurches', $data, function($message)
       {
         // 測試
-        $message->to('lancetw@gmail.com', '一領一禱告認領同工')->subject('一領一禱告認領：新加入教會通知');
+        $message->to('lancetw@gmail.com', '一領一禱告認領同工')->subject('一領一禱告認領：新加入教會通知 ' . date('Y/m/d'));
       });
     }
   }

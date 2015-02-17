@@ -38,7 +38,7 @@ a:hover.ff { background-color: #6CF !important; text-decoration: none !important
                                         <tr>
                                             <td>
                                                 <h1 style="color: #434; margin: 0px; font-weight: normal; font-size: 42px; font-family: Helvetica, Arial, sans-serif;">一領一禱告認領</h1>
-                                                <h2 style="color: #767; margin: 0px; font-weight: normal; font-size: 22px; font-family: Helvetica, Arial, sans-serif;">新加入教會通知信
+                                                <h2 style="color: #767; margin: 0px; font-weight: normal; font-size: 22px; font-family: Helvetica, Arial, sans-serif;">新加入教會通知信 ◎ {{{ date('Y/m/d') }}}
                                                 </h2>
                                             </td>
                                         </tr>
@@ -65,9 +65,13 @@ a:hover.ff { background-color: #6CF !important; text-decoration: none !important
                                             <td>
                                                 <h2 style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: #333 !important; margin: 0px;">昨日新加入教會總覽</h2>
                                                 <div style="margin-top: 5px; margin-bottom: 20px; border: 1px solid #ccc; width: 100%;"></div>
+
                                                 @foreach ($churches as $church)
-                                                <p style="color: #000; margin: 0 0 8px 0; font-size: 18px; color:#4b98d7; font-family: Georgia, 'Times New Roman', Times, serif;">{{{ $church->name }}} (<a href="http://1and1.ccea.org.tw/dash/#/{{{ $church->qlink }}}">{{{ $church->qlink }}}</a>)</p>
+                                                    <p style="color: #000; margin: 0 0 8px 0; font-size: 18px; color:#4b98d7; font-family: Georgia, 'Times New Roman', Times, serif;">{{{ $church->name }}} (<a href="http://1and1.ccea.org.tw/dash/#/{{{ $church->qlink }}}">{{{ $church->qlink }}}</a>)</p>
                                                 @endforeach
+
+                                                @empty
+                                                    <p style="color: #000; margin: 0 0 8px 0; font-size: 18px; color:#4b98d7; font-family: Georgia, 'Times New Roman', Times, serif;">沒有新的教會資料</p>
                                         </tr>
                                     </table>
                                     <!--/section 1-->
