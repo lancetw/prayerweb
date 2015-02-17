@@ -32,13 +32,13 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->belongsToMany('target')->withPivot('user_church');
+    return $this->belongsToMany('Target', 'UserChurch', 'uid', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->belongsToMany('busted')->withPivot('user_church');
+    return $this->belongsToMany('Busted', 'UserChurch', 'uid', 'uid');
   }
 
 
