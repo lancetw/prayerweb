@@ -7,7 +7,6 @@ class DataController extends \BaseController {
   public function __construct()
   {
     //$this->beforeFilter('auth.api');
-    Cache::flush();
   }
 
   public function getIndex()
