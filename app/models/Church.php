@@ -32,13 +32,13 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->hasManyThrough('Target', 'User', 'id', 'uid');
+    return $this->user->targets();
   }
 
 
   public function busteds()
   {
-    return $this->hasManyThrough('Busted', 'User', 'id', 'uid');
+    return $this->user->busteds();
   }
 
 
