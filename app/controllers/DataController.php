@@ -41,7 +41,7 @@ class DataController extends \BaseController {
 
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($church) {
-      $out['count'] = $church->users()->targets->count();
+      $out['count'] = $church->targets()->count();
     }
 
     return Response::json($out);
@@ -310,7 +310,7 @@ class DataController extends \BaseController {
 
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($church) {
-      $rdata = $church->users()->targets->orderBy('created_at', 'DESC')->get()->each(function ($item) {
+      $rdata = $church->targets()->orderBy('created_at', 'DESC')->get()->each(function ($item) {
         $item->setHidden(['cid', 'id', 'uid', 'name', 'deleted_at', 'updated_at']);
       })->toArray();
 
@@ -349,6 +349,23 @@ class DataController extends \BaseController {
     return Response::json($out);
   }
 
+  public function getTest()
+  {
+    $in = Input::only('qlink');
+    $out = Array();
+
+    $rules = array(
+        'qlink' => 'required | alpha_num'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+
+    $church = Church::where('qlink', $in['qlink'])->first();
+    $out = $church->targets()->get();
+
+    return Response::json($out);
+  }
 
   public function getInfo()
   {
@@ -363,9 +380,9 @@ class DataController extends \BaseController {
     if($vd->fails()) return;
 
     $church = Church::where('qlink', $in['qlink'])->first();
-    $sinners = $church->users()->targets->where('sinner', '=', true)->count();
-    $baptizeds = $church->users()->targets->where('baptized', '=', true)->count();
-    $meeters = $church->users()->targets->where('meeter', '=', true)->count();
+    $sinners = $church->targets()->where('sinner', '=', true)->count();
+    $baptizeds = $church->targets()->where('baptized', '=', true)->count();
+    $meeters = $church->targets()->where('meeter', '=', true)->count();
 
     if ($church) {
       $out = array(
