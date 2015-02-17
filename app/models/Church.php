@@ -26,19 +26,19 @@ class Church extends \Eloquent {
 
   public function users()
   {
-    return $this->belongsToMany('User', 'UserChurch', 'cid', 'id');
+    return $this->belongsToMany('User', 'user_churches', 'cid', 'id');
   }
 
 
   public function targets()
   {
-    return $this->belongsToMany('Target', 'UserChurch', 'cid', 'uid');
+    return $this->belongsToMany('Target', 'user_churches', 'cid', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->belongsToMany('Busted', 'UserChurch', 'cid', 'uid');
+    return $this->belongsToMany('Busted', 'user_churches', 'cid', 'uid');
   }
 
 
