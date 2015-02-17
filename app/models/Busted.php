@@ -24,7 +24,7 @@ class Busted extends \Eloquent {
 
   public function user()
   {
-    return $this->hasOne('User', 'uid');
+    return $this->belongsTo('User', 'uid');
   }
 
 }
