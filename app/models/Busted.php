@@ -21,4 +21,10 @@ class Busted extends \Eloquent {
    * @var array
    */
   protected $hidden = array('uid', 'name', 'deleted_at', 'created_at', 'updated_at', 'id');
+
+  public function user()
+  {
+    return $this->hasOne('User', 'uid');
+  }
+
 }
