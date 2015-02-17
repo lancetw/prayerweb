@@ -31,6 +31,11 @@ class UserChurch extends \Eloquent {
                  ->get();
   }
 
+  public function user()
+  {
+    return $this->belongsTo('User', 'id', 'uid');
+  }
+
   public function scopeGroupTodayByHours($query)
   {
     return $query
