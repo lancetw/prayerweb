@@ -26,7 +26,7 @@ class Church extends \Eloquent {
 
   public function users()
   {
-    return $this->hasMany('Users');
+    return $this->hasMany('User');
   }
 
 
