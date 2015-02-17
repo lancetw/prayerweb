@@ -44,12 +44,12 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 
   public function targets()
   {
-    return $this->hasMany('targets');
+    return $this->hasMany('targets', 'uid', 'id');
   }
 
   public function busteds()
   {
-    return $this->hasMany('busteds');
+    return $this->hasMany('busteds', 'uid', 'id');
   }
 
 }
