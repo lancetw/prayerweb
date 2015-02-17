@@ -37,14 +37,4 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
     return $this->uuidx;
   }
 
-  public function churchs()
-  {
-    return $this->hasMany('UserChurch');
-  }
-
-  public function targets()
-  {
-    return $this->hasMany('targets');
-  }
-
 }
