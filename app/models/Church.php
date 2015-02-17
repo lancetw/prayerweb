@@ -26,19 +26,19 @@ class Church extends \Eloquent {
 
   public function users()
   {
-    return $this->hasManyThrough('User', 'UserChurch', 'cid', 'id');
+    return $this->belongsToMany('User', 'UserChurch', 'cid', 'id');
   }
 
 
   public function targets()
   {
-    return $this->hasManyThrough('Target', 'UserChurch', 'cid', 'uid');
+    return $this->belongsToMany('Target', 'UserChurch', 'cid', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->hasManyThrough('Busted', 'UserChurch', 'cid', 'uid');
+    return $this->belongsToMany('Busted', 'UserChurch', 'cid', 'uid');
   }
 
 
