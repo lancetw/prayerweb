@@ -126,7 +126,7 @@ return array(
 		'Barryvdh\Cors\CorsServiceProvider',
 		'Mitch\Hashids\HashidsServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'Liebig\Cron\CronServiceProvider',
+		'Liebig\Cron\CronServiceProvider'
 
 	),
 
