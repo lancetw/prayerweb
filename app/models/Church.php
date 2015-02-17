@@ -29,19 +29,6 @@ class Church extends \Eloquent {
     return $this->belongsToMany('User', 'user_churches', 'cid', 'id');
   }
 
-
-  public function targets()
-  {
-    return $this->users()->hasMany('Target', 'uid', 'id');
-  }
-
-
-  public function busteds()
-  {
-    return $this->users()->hasMany('Busted', 'uid', 'id');
-  }
-
-
   public function newCollection(array $models = array())
   {
       return new Extensions\ChurchCollection($models);
