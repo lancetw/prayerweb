@@ -3,7 +3,7 @@
 Event::listen('cron.collectJobs', function() {
   /* 每日早上2點30分發送 EMAIL */
 
-  Cron::add('daily new churches notification', '30 2 * * *', function() {
+  Cron::add('daily new churches notification', '37 2 * * *', function() {
 
     $churches = Church::yesterday();
 
