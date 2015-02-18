@@ -1,9 +1,9 @@
 <?php
 
 Event::listen('cron.collectJobs', function() {
-  /* 每日早上9點02分發送 EMAIL */
-  Cron::setDatabaseLogging(false);
-  Cron::add('daily new churches notification', '02 9 * * *', function() {
+  /* 每日早上2點30分發送 EMAIL */
+
+  Cron::add('daily new churches notification', '30 2 * * *', function() {
 
     $churches = Church::yesterday();
 

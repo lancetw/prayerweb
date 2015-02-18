@@ -6,13 +6,13 @@ return array(
     'runInterval' => 1,
 
     // Should the Laravel integrated logger handle the logging
-    'laravelLogging' => true,
+    'laravelLogging' => false,
 
     // Enable or disable database logging
-    'databaseLogging' => true,
+    'databaseLogging' => false,
 
     // Enable or disable logging error jobs only
-    'logOnlyErrorJobsToDatabase' => false,
+    'logOnlyErrorJobsToDatabase' => true,
 
     // Delte old database entries after how many hours - if this value is set to 0, no entries will be deleted
     'deleteDatabaseEntriesAfter' => 240,
