@@ -125,7 +125,7 @@ return array(
 		'anlutro\cURL\Laravel\cURLServiceProvider',
 		'Barryvdh\Cors\CorsServiceProvider',
 		'Mitch\Hashids\HashidsServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider',
+//		'Way\Generators\GeneratorsServiceProvider',
 		'Liebig\Cron\CronServiceProvider'
 
 	),

@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # Exclude directory from rewriting
+    RewriteRule ^(dash|phpMyAdmin) - [L]
+
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
@@ -12,4 +15,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
 </IfModule>

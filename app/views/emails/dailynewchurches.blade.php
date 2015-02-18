@@ -67,7 +67,7 @@ a:hover.ff { background-color: #6CF !important; text-decoration: none !important
                                                 <div style="margin-top: 5px; margin-bottom: 20px; border: 1px solid #ccc; width: 100%;"></div>
 
                                                 @foreach ($churches as $church)
-                                                    <p style="color: #000; margin: 0 0 8px 0; font-size: 18px; color:#4b98d7; font-family: Georgia, 'Times New Roman', Times, serif;">{{{ $church->name }}} (<a href="http://1and1.ccea.org.tw/dash/#/{{{ $church->qlink }}}">{{{ $church->qlink }}}</a>)</p>
+                                                    <p style="color: #000; margin: 0 0 8px 0; font-size: 18px; color:#4b98d7; font-family: Georgia, 'Times New Roman', Times, serif;">{{{ $church->name }}} (<a href="http://1and1.ccea.org.tw/dash/d/#/{{{ $church->qlink }}}">{{{ $church->qlink }}}</a>)</p>
                                                 @endforeach
 
                                                 @if (!count($churches))
