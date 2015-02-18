@@ -1,7 +1,6 @@
 <?php
 
 Event::listen('cron.collectJobs', function() {
-  /* 每日早上2點30分發送 EMAIL */
 
   Cron::add('daily new churches notification', $_ENV['CRON_DAILY'], function() {
 
