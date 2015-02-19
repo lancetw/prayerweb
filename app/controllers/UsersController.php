@@ -156,6 +156,8 @@ class UsersController extends \BaseController {
     $authId = Auth::user()->id;
 
     if ($id === $authId) {
+      $userChurch = UserChurches::where('uid', $authId)->first();
+      $userChurch->delete();
       $user = User::find($id);
       $user->delete();
     } else {
