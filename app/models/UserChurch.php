@@ -51,8 +51,8 @@ class UserChurch extends \Eloquent {
   public function scopeGroupLastWeekByDays($query)
   {
     return $query
-      ->where('created_at', '>', Carbon::now()->subWeek()->startOfWeek()->subDay())
-      ->where('created_at', '<', Carbon::now()->subWeek()->endOfWeek()->subDay())
+      ->where('created_at', '>', Carbon::now()->startOfWeek()->subWeek()->subDay())
+      ->where('created_at', '<', Carbon::now()->endOfWeek()->subWeek()->subDay())
       ->get()
       ->groupBy(function($date) {
         return Carbon::parse($date->created_at)->format('N');
