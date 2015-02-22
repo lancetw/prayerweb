@@ -31,12 +31,12 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->hasManyThrough('Target', 'UserChurch', 'cid', 'uid');
+    return $this->hasManyThrough('Target', 'User', 'cid', 'uid');
   }
 
   public function busteds()
   {
-    return $this->hasManyThrough('Busted', 'UserChurch', 'cid', 'uid');
+    return $this->hasManyThrough('Busted', 'User', 'cid', 'uid');
   }
 
   public function newCollection(array $models = array())
