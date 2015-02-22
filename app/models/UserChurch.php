@@ -26,8 +26,8 @@ class UserChurch extends \Eloquent {
 
   public function scopeToday($query)
   {
-    return $query->where('created_at', '>', Carbon::today()->startOfDay())
-                 ->where('created_at', '<', Carbon::today()->endOfDay())
+    return $query->where('created_at', '>', Carbon::now()->startOfWeek()->subDay())
+                 ->where('created_at', '<', Carbon::now()->endOfWeek()->subDay())
                  ->get();
   }
 
