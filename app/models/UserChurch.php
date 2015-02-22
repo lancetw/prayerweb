@@ -79,7 +79,7 @@ class UserChurch extends \Eloquent {
       ->where('created_at', '<', Carbon::now()->endOfYear())
       ->get()
       ->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->format('n');
+        return Carbon::parse($date->created_at)->format('N');
       });
   }
 
