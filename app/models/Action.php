@@ -59,8 +59,8 @@ class Action extends \Eloquent {
   public function scopeGroupLastWeekByDays($query)
   {
     return $query
-      ->where('created_at', '>', Carbon::now()->startOfWeek()->subWeek())
-      ->where('created_at', '<', Carbon::now()->endOfWeek()->subWeek())
+      ->where('created_at', '>', Carbon::now()->startOfWeek()->subDay())
+      ->where('created_at', '<', Carbon::now()->endOfWeek()->subDay())
       ->get()
       ->groupBy(function($date) {
         return Carbon::parse($date->created_at)->format('N');
