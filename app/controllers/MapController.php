@@ -47,7 +47,7 @@ class MapController extends \BaseController {
 
   public function anyNearby($dist='1000')
   {
-    $in = Input::only('code', 'city', 'town', 'lat', 'lng');
+    $in = Input::only('code', 'city', 'town', 'filter', 'lat', 'lng');
     $out = Array();
 
     $rules = array(
@@ -76,7 +76,19 @@ class MapController extends \BaseController {
     } else {
       if (empty($in['town'])) return;
 
-      $out = $this->mapInfo_($in);
+      $rdata = $this->mapInfo_($in);
+      if ($in['filter']) {
+        $filter = $in['filter'];
+        $out = array_filter($rdata, function ($a) use ($filter) {
+          if (strpos($a->ocname, $filter) === false) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+      } else {
+        $out = $rdata;
+      }
     }
 
     $per = 20;
