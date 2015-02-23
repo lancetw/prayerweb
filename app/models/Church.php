@@ -32,7 +32,7 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    $this->setPrimaryKey('id');
+    $this->setPrimaryKey('uid');
     $relation = $this->belongsToMany('Target', 'user_churches', 'uid', 'cid');
     $this->setPrimaryKey('id');
 
