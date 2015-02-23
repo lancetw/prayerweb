@@ -38,13 +38,13 @@ class UserChurch extends \Eloquent {
 
   public function scopeTargets($query, $cid)
   {
-    $uid = $query->where('cid', $cid)->plunk('uid');
+    $uid = $query->where('cid', $cid)->pluck('uid');
     return Target::where('uid', $uid)->get();
   }
 
   public function scopeBusteds($query, $cid)
   {
-    $uid = $query->where('cid', $cid)->plunk('uid');
+    $uid = $query->where('cid', $cid)->pluck('uid');
     return Busted::where('uid', $uid)->get();
   }
 
