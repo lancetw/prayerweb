@@ -27,7 +27,7 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->belongsToMany('Target', 'user_churches', 'uid', 'cid')->withPivot('uid', 'cid');
+    return $this->belongsToMany('Target', 'user_churches', 'uid', 'cid');
   }
 
 
