@@ -58,9 +58,8 @@ class ChurchesController extends \BaseController {
         $cid = Church::where('name', $in['name'])->pluck('id');
         $statusCode = 201;
         // 先檢查是否已經加入教會
-        $uc_ = UserChurch::where('uid', Auth::user()->id)->first();
-        if ($uc_ && $uc_->uid === Auth::user()->id) {
-          $uc = UserChurch::find($uc_->id);
+        $uc = UserChurch::where('uid', Auth::user()->id)->first();
+        if ($uc && $uc->uid === Auth::user()->id) {
           $uc->cid = $cid;
           $uc->save();
         } else {
