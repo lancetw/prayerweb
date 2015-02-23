@@ -27,19 +27,19 @@ class Church extends \Eloquent {
 
   public function uc()
   {
-    return $this->hasMany('UserChurch');
+    return $this->hasMany('UserChurch', 'cid');
   }
 
 
   public function targets()
   {
-    return $this->uc->hasMany('Target');
+    return $this->uc->hasMany('Target', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->uc->hasMany('Busted');
+    return $this->uc->hasMany('Busted', 'uid');
   }
 
 
