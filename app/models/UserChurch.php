@@ -33,6 +33,18 @@ class UserChurch extends \Eloquent {
   }
 
 
+  public function targets()
+  {
+    return $this->hasMany('Target', 'uid');
+  }
+
+
+  public function busteds()
+  {
+    return $this->hasMany('Busted', 'uid');
+  }
+
+
   public function user()
   {
     return $this->belongsTo('User', 'id', 'uid');
