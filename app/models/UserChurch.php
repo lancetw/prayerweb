@@ -36,6 +36,18 @@ class UserChurch extends \Eloquent {
     return $this->belongsTo('User', 'id', 'uid');
   }
 
+  public function scopeTargets($query, $cid)
+  {
+    $uid = $query->where('cid', $cid)->plunk('uid');
+    return Target::where('uid', $uid)->get();
+  }
+
+  public function scopeBusteds($query, $cid)
+  {
+    $uid = $query->where('cid', $cid)->plunk('uid');
+    return Busted::where('uid', $uid)->get();
+  }
+
   public function scopeGroupTodayByHours($query)
   {
     return $query

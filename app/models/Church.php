@@ -24,20 +24,18 @@ class Church extends \Eloquent {
    */
   protected $hidden = array('id', 'cid', 'deleted_at', 'created_at', 'updated_at');
 
-  public function users()
-  {
-    return $this->belongsToMany('User', 'user_churches', 'cid', 'uid');
-  }
 
   public function targets()
   {
-    return $this->hasManyThrough('Target', 'User', 'cid', 'uid');
+    return UserChurch::targets($this->cid);
   }
+
 
   public function busteds()
   {
-    return $this->hasManyThrough('Busted', 'User', 'cid', 'uid');
+    return UserChurch::busteds($this->cid);
   }
+
 
   public function newCollection(array $models = array())
   {
