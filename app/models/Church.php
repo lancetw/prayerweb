@@ -33,13 +33,13 @@ class Church extends \Eloquent {
 
   public function targets()
   {
-    return $this->uc->hasMany('Target', 'uid');
+    return $this->uc()->hasMany('Target', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->uc->hasMany('Busted', 'uid');
+    return $this->uc()->hasMany('Busted', 'uid');
   }
 
 
