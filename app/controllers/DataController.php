@@ -46,7 +46,7 @@ class DataController extends \BaseController {
 
     $queries = DB::getQueryLog();
     $last_query = end($queries);
-    echo $last_query;
+    return Response::json($last_query);
     //return Response::json($out);
   }
 
