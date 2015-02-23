@@ -24,6 +24,19 @@ class UserChurch extends \Eloquent {
    */
   protected $hidden = array('deleted_at', 'created_at', 'updated_at');
 
+
+  public function targets()
+  {
+    return $this->hasMany('Target', 'uid');
+  }
+
+
+  public function busteds()
+  {
+    return $this->hasMany('Busted', 'uid');
+  }
+
+
   public function scopeToday($query)
   {
     return $query->where('created_at', '>', Carbon::today()->startOfDay())

@@ -25,21 +25,9 @@ class Church extends \Eloquent {
   protected $hidden = array('id', 'cid', 'deleted_at', 'created_at', 'updated_at');
 
 
-  public function uc()
+  public function userChurches()
   {
     return $this->hasMany('UserChurch', 'cid');
-  }
-
-
-  public function targets()
-  {
-    return $this->uc()->hasMany('Target', 'uid');
-  }
-
-
-  public function busteds()
-  {
-    return $this->uc()->hasMany('Busted', 'uid');
   }
 
 
