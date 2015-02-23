@@ -25,9 +25,18 @@ class Church extends \Eloquent {
   protected $hidden = array('id', 'cid', 'deleted_at', 'created_at', 'updated_at');
 
 
+  protected function setPrimaryKey($key)
+  {
+    $this->primaryKey = $key;
+  }
+
   public function targets()
   {
-    return $this->belongsToMany('Target', 'user_churches', 'uid', 'cid');
+    $this->setPrimaryKey('id');
+    $relation = $this->belongsToMany('Target', 'user_churches', 'uid', 'cid');
+    $this->setPrimaryKey('id');
+
+    return $relation;
   }
 
 
