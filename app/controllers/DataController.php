@@ -41,7 +41,7 @@ class DataController extends \BaseController {
 
     $church = Church::where('qlink', $in['qlink'])->first();
     if ($church) {
-      $out['count'] = $church->userChurches->targets->count();
+      $out['count'] = $church->userChurches()->targets()->count();
     }
 
     return Response::json($out);
