@@ -31,6 +31,18 @@ class Church extends \Eloquent {
   }
 
 
+  public function targets()
+  {
+    return $this->hasMany('Target', 'uid');
+  }
+
+
+  public function busteds()
+  {
+    return $this->hasMany('Busted', 'uid');
+  }
+
+
   public function newCollection(array $models = array())
   {
       return new Extensions\ChurchCollection($models);
