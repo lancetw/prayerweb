@@ -24,6 +24,9 @@ class UserChurch extends \Eloquent {
    */
   protected $hidden = array('deleted_at', 'created_at', 'updated_at');
 
+  protected $primaryKey = 'uid';
+
+
   public function scopeToday($query)
   {
     return $query->where('created_at', '>', Carbon::today()->startOfDay())
