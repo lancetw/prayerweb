@@ -35,13 +35,13 @@ class UserChurch extends \Eloquent {
 
   public function targets()
   {
-    return $this->hasMany('Target', 'uid');
+    return $this->hasMany('Target', 'uid', 'uid');
   }
 
 
   public function busteds()
   {
-    return $this->hasMany('Busted', 'uid');
+    return $this->hasMany('Busted', 'uid', 'uid');
   }
 
 
