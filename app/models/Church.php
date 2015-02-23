@@ -24,21 +24,20 @@ class Church extends \Eloquent {
    */
   protected $hidden = array('id', 'cid', 'deleted_at', 'created_at', 'updated_at');
 
-
-  protected function setPrimaryKey($key)
+  public function users()
   {
-    $this->primaryKey = $key;
+    return $this->belongsToMany('User', 'user_churches', 'cid', 'uid');
   }
 
   public function targets()
   {
-    $this->setPrimaryKey('uid');
-    $relation = $this->belongsToMany('Target', 'user_churches', 'uid', 'cid');
-    $this->setPrimaryKey('id');
-
-    return $relation;
+    return $this->hasManyThrough('Target', 'UserChurch', 'cid', 'id');
   }
 
+  public function busteds()
+  {
+    return $this->hasManyThrough('Busted', 'UserChurch', 'cid', 'id');
+  }
 
   public function newCollection(array $models = array())
   {

@@ -44,10 +44,7 @@ class DataController extends \BaseController {
       $out['count'] = $church->targets()->count();
     }
 
-    $queries = DB::getQueryLog();
-    $last_query = end($queries);
-    return Response::json($last_query);
-    //return Response::json($out);
+    return Response::json($out);
   }
 
 
