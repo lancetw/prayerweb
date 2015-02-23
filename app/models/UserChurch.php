@@ -31,22 +31,12 @@ class UserChurch extends \Eloquent {
                  ->get();
   }
 
+
   public function user()
   {
     return $this->belongsTo('User', 'id', 'uid');
   }
 
-  public function scopeTargets($query, $cid)
-  {
-    $uid = $query->where('cid', $cid)->pluck('uid');
-    return Target::where('uid', $uid)->get();
-  }
-
-  public function scopeBusteds($query, $cid)
-  {
-    $uid = $query->where('cid', $cid)->pluck('uid');
-    return Busted::where('uid', $uid)->get();
-  }
 
   public function scopeGroupTodayByHours($query)
   {
