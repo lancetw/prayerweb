@@ -18,6 +18,7 @@ return array(
     "after"            => ":attribute 必須要在 :date 之後。",
     "alpha"            => ":attribute 只能以字母組成。",
     "alpha_dash"       => ":attribute 只能以字母、數字及斜線組成。",
+    "alpha_spaces"     => ":attribute 只能以字母、數字、斜線及空白組成。",
     "alpha_num"        => ":attribute 只能以字母及數字組成。",
     "array"            => ":attribute 必须为数组。",
     "before"           => ":attribute 必須要在 :date 之前。",

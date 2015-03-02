@@ -41,7 +41,7 @@ class ChurchesController extends \BaseController {
     $in = Input::only('name', 'lat', 'lng', 'cid');
 
     $rules = array(
-      'name' => 'required | alpha_dash | unique:churches',
+      'name' => 'required | alpha_spaces | unique:churches',
       'lat'  => 'numeric',
       'lng'  => 'numeric',
       'cid'  => 'integer'
