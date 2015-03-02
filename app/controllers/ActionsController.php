@@ -28,7 +28,7 @@ class ActionsController extends \BaseController {
   {
     $response = new stdClass;
     $statusCode = 201;
-    $in = Input::only('tid');
+    $in = Input::only('tid', 'created_at');
 
     $rules = array(
       'tid'  => 'required | integer'
