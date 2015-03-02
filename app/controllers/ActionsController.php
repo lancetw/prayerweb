@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class ActionsController extends \BaseController {
 
   public function __construct()
@@ -60,7 +62,15 @@ class ActionsController extends \BaseController {
       if ($uid == $authId) {
         $in['uid'] = Auth::user()->id;
         $in['cid'] = $cid;
-        Action::create($in);
+
+        $action = Action::create($in);
+
+        if ($in['created_at']) {
+          $in['created_at'] = Carbon::createFromTimeStamp($in['created_at'], 'Asia/Taipei')->toDateTimeString();
+          $action->setCreatedAt($in['created_at']);
+          $action->save();
+        }
+
       } else {
         $statusCode = 403;
       }
