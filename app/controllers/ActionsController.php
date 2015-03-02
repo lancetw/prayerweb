@@ -28,7 +28,7 @@ class ActionsController extends \BaseController {
   {
     $response = new stdClass;
     $statusCode = 201;
-    $in = Input::only('tid');
+    $in = Input::only('tid', 'created_at');
 
     $rules = array(
       'tid'  => 'required | integer'
@@ -68,18 +68,6 @@ class ActionsController extends \BaseController {
     }
 
     return Response::json($response, $statusCode);
-  }
-
-  /**
-   * Display the specified resource.
-   * GET /actions/{id}
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id)
-  {
-    //
   }
 
 }
