@@ -1,6 +1,6 @@
 <?php
 
 return array(
-	'length'   => 4,
+	'length'   => 6,
 	'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
 );
