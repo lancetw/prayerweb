@@ -3,9 +3,12 @@
 
     public static function makeQlink($name)
     {
-      $t = microtime(true) * 10000;
-      $hashids = Hashids::encode($t);
-      return $hashids;
+      sleep(2);
+
+      $t = (int) (microtime(true));
+
+      return Hashids::encode($t);
+
     }
 
 
