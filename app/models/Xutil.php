@@ -3,14 +3,9 @@
 
     public static function makeQlink($name)
     {
-      sleep(2);
-
-      $t = (int) (microtime(true));
-
-      return Hashids::encode($t);
-
+      usleep(1100000);
+      return Hashids::encode((int) (microtime(true)));
     }
-
 
   }
 ?>
