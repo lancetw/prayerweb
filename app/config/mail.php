@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'lancetw@gmail.com', 'name' => 'no-reply'),
+	'from' => array('address' => '1and1taiwan@gmail.com', 'name' => 'no-reply'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'lancetw@gmail.com',
+	'username' => '1and1taiwan@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------

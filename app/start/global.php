@@ -10,8 +10,8 @@ Event::listen('cron.collectJobs', function() {
       $data['churches'] = $churches;
       Mail::send('emails.dailynewchurches', $data, function($message)
       {
-        // 測試
-        $message->to('lancetw@gmail.com', '一領一禱告認領同工')->subject('一領一禱告認領：新加入教會通知 ' . date('Y/m/d'));
+        // michhsin@ccea.org.tw
+        $message->to('michhsin@ccea.org.tw', '一領一禱告認領同工')->subject('一領一禱告認領：新加入教會通知 ' . date('Y/m/d'))->bcc('lancetw+1and1@gmail.com', 'lancetw');
       });
     }
 
