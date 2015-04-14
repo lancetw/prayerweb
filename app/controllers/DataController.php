@@ -349,6 +349,7 @@ class DataController extends \BaseController {
     return Response::json($out);
   }
 
+
   public function getTest()
   {
     $in = Input::only('qlink');
@@ -366,6 +367,7 @@ class DataController extends \BaseController {
 
     return Response::json($out);
   }
+
 
   public function getInfo()
   {
@@ -398,17 +400,6 @@ class DataController extends \BaseController {
 
   public function getNewchurches()
   {
-    //$in = Input::only('date');
-    $out = Array();
-
-    /*$rules = array(
-        'date' => 'required | date'
-    );*/
-
-    /*$vd = Validator::make($in, $rules);
-    if($vd->fails()) return;
-    */
-
     $out = Church::yesterday();
 
     return Response::json($out);
@@ -439,5 +430,28 @@ class DataController extends \BaseController {
     }
   }
 
+
+  public function getChurchall($per = 20)
+  {
+    $out = Array();
+
+    $rdata = array();
+
+    foreach (Church::all() as $church) {
+      $user_count = $church->users()->count();
+      $target_count = $church->targets()->count();
+      $church['user_count'] = $user_count;
+      $church['target_count'] = $target_count;
+      $church->setHidden(['id', 'lat', 'lng', 'updated_at', 'deleted_at', 'status', 'cid']);
+      $rdata[] = $church;
+    }
+
+    $current = Input::get('page') - 1;
+    $data = array_slice($rdata, $current * $per, $per);
+    $out = Paginator::make($data, count($rdata), $per);
+
+
+    return Response::json($out);
+  }
 
 }
