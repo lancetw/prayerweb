@@ -433,11 +433,22 @@ class DataController extends \BaseController {
 
   public function getChurchall($per = 20)
   {
+    $in = Input::only('apikey');
+
     $out = Array();
+
+    $rules = array(
+        'apikey' => 'required | alpha_num'
+    );
+
+    $vd = Validator::make($in, $rules);
+    if($vd->fails()) return;
+
+    if ($in['apikey'] != 'ccea77120806') return;
 
     $rdata = array();
 
-    foreach (Church::all() as $church) {
+    foreach (Church::orderBy('created_at', 'DESC')->get() as $church) {
       if ($church->status == 0) {
         $user_count = $church->users()->count();
         $target_count = $church->targets()->count();
