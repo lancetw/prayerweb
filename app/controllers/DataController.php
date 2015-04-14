@@ -438,12 +438,14 @@ class DataController extends \BaseController {
     $rdata = array();
 
     foreach (Church::all() as $church) {
-      $user_count = $church->users()->count();
-      $target_count = $church->targets()->count();
-      $church['user_count'] = $user_count;
-      $church['target_count'] = $target_count;
-      $church->setHidden(['id', 'lat', 'lng', 'updated_at', 'deleted_at', 'status', 'cid']);
-      $rdata[] = $church;
+      if ($church['status'] !== 1) {
+        $user_count = $church->users()->count();
+        $target_count = $church->targets()->count();
+        $church['user_count'] = $user_count;
+        $church['target_count'] = $target_count;
+        $church->setHidden(['id', 'lat', 'lng', 'updated_at', 'deleted_at', 'status', 'cid']);
+        $rdata[] = $church;
+      }
     }
 
     $current = Input::get('page') - 1;
