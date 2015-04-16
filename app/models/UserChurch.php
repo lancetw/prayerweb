@@ -110,7 +110,19 @@ class UserChurch extends \Eloquent {
       ->where('created_at', '<', Carbon::now()->endOfMonth())
       ->get()
       ->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->weekOfMonth;
+        $day = Carbon::parse($date->created_at);
+
+        $end = $day->copy()->addDay()->weekOfYear;
+        $start = $day->startOfMonth()->weekOfYear;
+        $weeknum = $end - $start + 1;
+
+        if ($weeknum < 0) {
+          $end = $day->copy()->subDay()->weekOfYear;
+          $start = $day->startOfMonth()->weekOfYear;
+          $weeknum = $end - $start + 1;
+        }
+
+        return $weeknum;
       });
   }
 

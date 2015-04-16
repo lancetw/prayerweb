@@ -350,25 +350,6 @@ class DataController extends \BaseController {
   }
 
 
-  public function getTest()
-  {
-    $in = Input::only('qlink');
-    $out = Array();
-
-    $rules = array(
-        'qlink' => 'required | alpha_num'
-    );
-
-    $vd = Validator::make($in, $rules);
-    if($vd->fails()) return;
-
-    $church = Church::where('qlink', $in['qlink'])->first();
-    $out = $church->targets()->get();
-
-    return Response::json($out);
-  }
-
-
   public function getInfo()
   {
     $in = Input::only('qlink');
